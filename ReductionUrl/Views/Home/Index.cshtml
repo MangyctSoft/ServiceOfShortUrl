@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script type="text/javascript">
+        constants = {
+            getStore: '@Url.RouteUrl("DefaultApi", new {controller = "Url", action = "all" })',
+            //getShort: '@Url.RouteUrl("DefaultApi", new {controller = "Url", action = "short" })'
+        }
+    </script>
+    <title>Index</title>
+</head>
+<body>
+    <div id="content">
+    </div>
+    <script type="text/javascript" src="@Url.Content("~/assets/bundle.js")"></script>
+</body>
+</html>
