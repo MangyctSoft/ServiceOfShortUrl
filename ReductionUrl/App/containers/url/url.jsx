@@ -12,13 +12,23 @@ class Url extends React.Component {
     render() {
         let posts = this.props.posts.records.map(item => {
             return (
-                <div key={item.id} className="post">
-                    <div className="header">{item.longUrl}</div>
-                    <div className="content">{item.shortUrl}</div>
-                    <div className="content">{item.created}</div>
-                    <div className="content">{item.count}</div>
-                    <hr />
-                </div>
+                <table>
+                    <tr>
+                        <th>Длинный урл</th>
+                        <th>Короткий</th>
+                        <th>Дата</th>
+                        <th>Счетчик</th>
+                    </tr>
+                    <tr>
+                        <div key={item.id} className="post"></div>
+                        <td className="header">{item.longUrl}</td>
+                        <td className="content">{item.shortUrl}</td>
+                        <td className="content">{item.created}</td>
+                        <td className="content">{item.count}</td>
+                    </tr>
+                </table>                  
+                    
+                
             );
         });
 
