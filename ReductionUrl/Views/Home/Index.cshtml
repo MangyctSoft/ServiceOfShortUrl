@@ -4,11 +4,14 @@
     <meta name="viewport" content="width=device-width" />
     <script type="text/javascript">
         constants = {
-            getStore: '@Url.RouteUrl("DefaultApi", new {controller = "Url", action = "all" })',
-            //getShort: '@Url.RouteUrl("DefaultApi", new {controller = "Url", action = "short" })'
+            getStore: '@Url.RouteUrl("DefaultApi", new {controller = "Store", action = "store" })',
+            removeUrl: '@Url.RouteUrl("DefaultApi", new {controller = "Store", action = "remove" })',
+            postUrl: '@Url.RouteUrl("DefaultApi", new {controller = "Store", action = "add" })',
+            updateUrl: '@Url.RouteUrl("DefaultApi", new {controller = "Store", action = "update" })'
         }
     </script>
-    <title>Index</title>
+    <link href="~/css/styles.css" rel="stylesheet" media="all">
+    <title>Url-cuter</title>
 </head>
 <body>
     <div id="content">

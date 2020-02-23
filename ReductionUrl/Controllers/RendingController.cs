@@ -6,9 +6,9 @@ namespace ReductionUrl.Controllers
 {
     public class RendingController : Controller
     {
-        IUrlService _urlService;
+        IStoreService _urlService;
 
-        public RendingController(IUrlService urlService)
+        public RendingController(IStoreService urlService)
         {
             _urlService = urlService;
         }
@@ -17,8 +17,9 @@ namespace ReductionUrl.Controllers
         public async Task<IActionResult> Out()
         {
             var request = Request.Path;
-
-            var findShortUrl = await _urlService.FindUrl(request);
+            var hasUrl = request.Value.Substring(1).ToLower();
+           
+            var findShortUrl = await _urlService.FindUrl(hasUrl);
 
             if (findShortUrl == null)
             {

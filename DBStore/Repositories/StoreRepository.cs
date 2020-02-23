@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBStore.Repositories
 {
-    public class UrlRepository : IUrlRepository
+    public class StoreRepository : IStoreRepository
     {
 
         public async Task AddUrl(StoreUrl url)
@@ -50,11 +50,10 @@ namespace DBStore.Repositories
             return result;
         }
 
-        public async Task UpdateUrl(int urlId)
+        public async Task UpdateUrl(StoreUrl url)
         {
             using (var context = new StoreContext())
             {
-                var url = new StoreUrl() { ID = urlId };
                 context.StoreUrls.Update(url);
                 await context.SaveChangesAsync();
             }
