@@ -35,7 +35,6 @@ namespace ReductionUrl.Services.Implementation
         public async Task AddUrl(string url)
         {
             var hashUrl = new HashUrl();
-
             var result = new StoreUrl()
             {
                 LongUrl = url,
@@ -58,12 +57,20 @@ namespace ReductionUrl.Services.Implementation
 
         public async Task<Page<StoreUrl>> GetUrls(int index, int pageSize)
         {
-            return await _repository.GetUrls(index, pageSize);
+            return await _repository.GetUrls(index, pageSize); ;
         }
 
-        public async Task UpdateUrl(StoreUrl url)
+        public async Task UpdateUrl(int id, string longUrl)
         {
-            await _repository.UpdateUrl(url);
+            if (id > 0)
+            {
+                var result = new StoreUrl()
+                {
+                    ID = id,
+                    LongUrl = longUrl
+                };
+                await _repository.UpdateUrl(result);
+            }
         }
 
 

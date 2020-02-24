@@ -1,32 +1,19 @@
-﻿import { GET_POSTS_SUCCESS, GET_POSTS_ERROR, DELETE_POST_SUCCESS, DELETE_POST_ERROR, ADD_URL_SUCCESS, ADD_URL_ERROR } from './storeUrlConstants.jsx'
+﻿import { GET_POSTS_SUCCESS, GET_POSTS_ERROR, DELETE_POST_SUCCESS, DELETE_POST_ERROR } from './storeUrlConstants.jsx'
+import { updateInputControll } from '../inputContorll/inputControllActions.jsx'
 import "isomorphic-fetch"
 
-export function receivePosts(data) {
-    return {
-        type: GET_POSTS_SUCCESS,
-        posts: data
-    }
-}
-
-export function errorReceive(err) {
-    return {
-        type: GET_POSTS_ERROR,
-        error: err
-    }
-}
 
 export function getUrls(pageIndex = 0) {
     return (dispatch) => {
         let queryTrailer = '?pageIndex=' + pageIndex;
-        console.log(queryTrailer);
         fetch(constants.getStore + queryTrailer)
             .then((response) => {
                 return response.json()
             }).then((data) => {
-                dispatch(receivePosts(data))
+                dispatch({ type: GET_POSTS_SUCCESS, payload: data })
             }).catch((ex) => {
                 console.log(ex);
-                dispatch(errorReceive(ex))
+                dispatch({ type: GET_POSTS_ERROR, payload: ex })
             });
     }
 }
@@ -52,40 +39,9 @@ export function deleteUrl(id) {
     }
 }
 
-export function changeUrl(text) {
-    console.log(text);
-    return {
-        type: CHANGE_URL,
-        payload: text
-    }
-}
-
-export function addNewUrl(texturl) {
+export function updateUrl(text) {
     return (dispatch) => {
-        console.log(texturl);
 
-        if (texturl) {
-            console.log('!!!' + texturl);
-
-            fetch(constants.postUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-
-                },
-                body: JSON.stringify(texturl)
-            }).then((response) => {
-                if (response.ok) {
-                    dispatch({ type: ADD_URL_SUCCESS });
-
-                } else {
-                    alert('Ошибка добавления записи');
-                    dispatch({ type: ADD_URL_ERROR, payload: 'Ошибка добавления записи' });
-                }
-            }).catch((ex) => {
-                alert(ex);
-                dispatch({ type: ADD_URL_ERROR, payload: ex });
-            });
-        }
+        dispatch(updateInputControll(text));
     }
 }

@@ -1,10 +1,11 @@
-﻿import React from 'react';
-import ReactDOM from 'react-dom';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import Row from '../../components/row.jsx';
-import { getUrls, deleteUrl } from './storeUrlActions.jsx'
-import "isomorphic-fetch";
+﻿import React from 'react'
+import ReactDOM from 'react-dom'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import Row from '../../components/row.jsx'
+import { getUrls, deleteUrl, updateUrl } from './storeUrlActions.jsx'
+import "isomorphic-fetch"
+
 
 
 class StoreUrl extends React.Component {
@@ -12,12 +13,15 @@ class StoreUrl extends React.Component {
         super(props);
         this.state = { query: location.search };
         this.deleteUrl = this.deleteUrl.bind(this);
+        this.updateUrl = this.updateUrl.bind(this);
     }
 
     deleteUrl(id) {
-        let pageIndex; let tag;
-       
         this.props.deleteUrl(id);
+    }
+
+    updateUrl(data) {
+        this.props.updateUrl(data);
     }
 
     componentDidMount() {
@@ -27,28 +31,25 @@ class StoreUrl extends React.Component {
     render() {
         let store = this.props.store.records.map(item => {
             return (
-                <Row key={item.id} data={item} deleteUrl={this.deleteUrl}/>
+                <Row key={item.id} data={item} deleteUrl={this.deleteUrl} updateUrl={this.updateUrl}/>
             );
         });
 
         return (
-
-            <div id="storeTable">
+            <div id="storeTable">     
                 <table className="table">
                     <thead>
-                    <tr>
-                        <th>Длинный урл</th>
-                        <th>Короткий</th>
-                        <th>Дата</th>
-                        <th>Счетчик</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                        </thead>
+                        <tr>
+                            <th width="300">Длинный урл</th>
+                            <th width="40">Короткий</th>
+                            <th width="250">Дата</th>
+                            <th width="40">Счетчик</th>
+                            <th width="70"></th>
+                            <th width="70"></th>
+                        </tr>
+                    </thead>
                     {store}
-                    
-                </table> 
-               
+                </table>
             </div>
         );
     }
@@ -56,7 +57,7 @@ class StoreUrl extends React.Component {
 
 let mapProps = (state) => {
     return {
-        store: state.storeUrl.data,
+        store: state.storeUrl.data,   
         error: state.storeUrl.error
     }
 }
@@ -64,7 +65,8 @@ let mapProps = (state) => {
 let mapDispatch = (dispatch) => {
     return {
         getUrls: bindActionCreators(getUrls, dispatch),
-        deleteUrl: bindActionCreators(deleteUrl, dispatch)
+        deleteUrl: bindActionCreators(deleteUrl, dispatch),
+        updateUrl: bindActionCreators(updateUrl, dispatch)
     }
 }
 

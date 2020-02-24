@@ -47,10 +47,11 @@ namespace ReductionUrl.Controllers
         }
 
         [Route("update")]
-        [HttpGet]
-        public async Task<StoreUrl> UpdateUrl([FromBody] string shortUrl)
+        [HttpPut]
+        public async Task UpdateUrl([FromBody] StoreUrl store)
         {
-            return await _storeService.FindUrl(shortUrl);
+
+            await _storeService.UpdateUrl(store.ID, store.LongUrl);
         }
     }
 }

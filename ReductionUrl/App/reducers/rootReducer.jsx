@@ -1,8 +1,8 @@
 ﻿import { combineReducers } from 'redux'
-import addUrl from '../containers/addUrl/addUrlReducer.jsx'
 import storeUrl from '../containers/storeUrl/storeUrlReducer.jsx'
+import inputControll from '../containers/inputContorll/inputControllReducer.jsx'
 
 export default combineReducers({
-    addUrl,
+    inputControll,
     storeUrl
 })

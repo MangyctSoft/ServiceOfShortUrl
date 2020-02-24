@@ -7,7 +7,7 @@
 .wrapper {
     padding-top: 5rem;
     margin: 0 auto;
-    width: 555px;
+    text-align:center;
 }
 
 input {
@@ -15,6 +15,15 @@ input {
     margin-bottom: 1rem;
 }
 
-table {
-    border: solid;
+table{
+    border-collapse: collapse;
+}
+table, th, td {
+    border:  1px solid black;
+    height: 40px;
+}
+
+th {
+    background-color:khaki;
+    color: black;
 }

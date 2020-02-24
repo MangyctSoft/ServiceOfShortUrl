@@ -9,7 +9,7 @@ namespace ReductionUrl.Services.Interfaces
         Task<StoreUrl> GetUrl(int id);
         Task AddUrl(string url);
         Task DeleteUrl(int id);
-        Task UpdateUrl(StoreUrl url);
+        Task UpdateUrl(int id, string longUrl);
         Task<StoreUrl> FindUrl(string shortUrl);
         Task Counter(int id);
     }

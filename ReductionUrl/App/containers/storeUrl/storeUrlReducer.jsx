@@ -1,17 +1,17 @@
-﻿import { GET_POSTS_SUCCESS, GET_POSTS_ERROR, DELETE_POST_SUCCESS, DELETE_POST_ERROR } from './storeUrlConstants.jsx'
+﻿import { GET_POSTS_SUCCESS, GET_POSTS_ERROR, DELETE_POST_SUCCESS, DELETE_POST_ERROR, CHANGE_URL} from './storeUrlConstants.jsx'
 
 const initialState = {
-    data: { currentPage: 0, totalPages: 0, pageSize: 0, records: [] },
+    data: { records: [] },
     error: ''
 }
 
 export default function storeUrl(state = initialState, action) {
     switch (action.type) {
         case GET_POSTS_SUCCESS:
-            return { ...state, data: action.posts, error: '' }
+            return { ...state, data: action.payload, error: '' }
 
         case GET_POSTS_ERROR:
-            return { ...state, error: action.error }
+            return { ...state, error: action.payload }
 
         case DELETE_POST_SUCCESS:
             return { ...state }

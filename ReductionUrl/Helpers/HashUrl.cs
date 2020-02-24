@@ -18,8 +18,9 @@ namespace ReductionUrl.Helpers
             {
                 hash.Append(theByte.ToString("x2"));
             }
-            var result = hash.ToString();                
-            return result.Substring(0, result.Length - 20); 
+            var text = hash.ToString();
+            var result = text.Substring(0, 6);
+            return result;
         }
     }
 }
