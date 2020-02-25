@@ -1,6 +1,7 @@
 ﻿using DBModels;
 using DBStore.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,18 +37,13 @@ namespace DBStore.Repositories
             }
         }
 
-        public async Task<Page<StoreUrl>> GetUrls(int index, int pageSize)
+        public async Task<IEnumerable<StoreUrl>> GetUrls()
         {
-            var result = new Page<StoreUrl>() { CurrentPage = index, PageSize = pageSize };
-
             using (var context = new StoreContext())
             {
                 var query = context.StoreUrls.AsQueryable(); 
-                result.TotalPages = await query.CountAsync();
-                result.Records = await query.OrderByDescending(p => p.Created).Skip(index * pageSize).Take(pageSize).ToListAsync();
+                return await query.OrderByDescending(p => p.Created).ToListAsync();
             }
-
-            return result;
         }
 
         public async Task UpdateUrl(StoreUrl url)

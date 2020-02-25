@@ -20,9 +20,9 @@ namespace ReductionUrl.Controllers
 
         [Route("store")]
         [HttpGet]
-        public async Task<Page<StoreUrl>> GetStore(int pageIndex)
+        public async Task<IEnumerable<StoreUrl>> GetStore()
         {
-            return await _storeService.GetUrls(pageIndex, 10);
+            return await _storeService.GetUrls();
         }
 
         [Route("short")]
@@ -41,7 +41,7 @@ namespace ReductionUrl.Controllers
 
         [Route("remove")]
         [HttpDelete]
-        public async Task RemoveUrl(int id)
+        public async Task RemoveUrl([FromBody]int id)
         {
             await _storeService.DeleteUrl(id);
         }

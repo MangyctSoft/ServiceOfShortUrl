@@ -25,27 +25,27 @@ class StoreUrl extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getUrls(0);
+        this.props.getUrls();
     }
 
     render() {
-        let store = this.props.store.records.map(item => {
+        let store = this.props.store.data.map(item => {
             return (
-                <Row key={item.id} data={item} deleteUrl={this.deleteUrl} updateUrl={this.updateUrl}/>
+                <Row key={item.id} data={item} deleteUrl={this.deleteUrl} updateUrl={this.updateUrl} />
             );
         });
 
         return (
-            <div id="storeTable">     
+            <div className="block" id="storeTable">     
                 <table className="table">
                     <thead>
                         <tr>
-                            <th width="300">Длинный урл</th>
-                            <th width="40">Короткий</th>
-                            <th width="250">Дата</th>
-                            <th width="40">Счетчик</th>
-                            <th width="70"></th>
-                            <th width="70"></th>
+                            <th width="400">Длинный урл</th>
+                            <th width="100">Короткий</th>
+                            <th width="350">Дата</th>
+                            <th width="100">Счетчик</th>
+                            <th width="100"></th>
+                            <th width="100"></th>
                         </tr>
                     </thead>
                     {store}
@@ -57,8 +57,7 @@ class StoreUrl extends React.Component {
 
 let mapProps = (state) => {
     return {
-        store: state.storeUrl.data,   
-        error: state.storeUrl.error
+        store: state.storeUrl
     }
 }
 

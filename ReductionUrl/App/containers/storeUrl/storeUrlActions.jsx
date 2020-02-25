@@ -3,10 +3,9 @@ import { updateInputControll } from '../inputContorll/inputControllActions.jsx'
 import "isomorphic-fetch"
 
 
-export function getUrls(pageIndex = 0) {
+export function getUrls() {
     return (dispatch) => {
-        let queryTrailer = '?pageIndex=' + pageIndex;
-        fetch(constants.getStore + queryTrailer)
+        fetch(constants.getStore)
             .then((response) => {
                 return response.json()
             }).then((data) => {
@@ -24,11 +23,12 @@ export function deleteUrl(id) {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(id)
         }).then((response) => {
             if (response.ok) {
                 dispatch({ type: DELETE_POST_SUCCESS });
-                getUrls(0)(dispatch);
+                getUrls()(dispatch);
             } else {
                 alert('Ошибка удаления записи');
                 dispatch({ type: DELETE_POST_ERROR, payload: 'Ошибка удаления записи' });

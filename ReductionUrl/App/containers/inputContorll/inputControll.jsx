@@ -51,7 +51,7 @@ class InputControll extends React.Component {
             ;
 
         return (
-            <div id="InputControll">
+            <div className="block" id="InputControll">
                 {inputAddUpdateUrl}
             </div>
         );

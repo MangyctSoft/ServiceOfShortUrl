@@ -1,7 +1,7 @@
 ﻿import { GET_POSTS_SUCCESS, GET_POSTS_ERROR, DELETE_POST_SUCCESS, DELETE_POST_ERROR, CHANGE_URL} from './storeUrlConstants.jsx'
 
 const initialState = {
-    data: { records: [] },
+    data: [],
     error: ''
 }
 

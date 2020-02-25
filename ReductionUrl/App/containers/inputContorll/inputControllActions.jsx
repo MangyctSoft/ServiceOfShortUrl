@@ -26,7 +26,7 @@ export function addNewUrl(texturl) {
             }).then((response) => {
                 if (response.ok) {
                     dispatch({ type: ADD_URL_SUCCESS });
-                    getUrls(0)(dispatch);
+                    getUrls()(dispatch);
 
                 } else {
                     alert('Ошибка добавления записи');
@@ -53,7 +53,7 @@ export function updateUrl(id, longUrl) {
             }).then((response) => {
                 if (response.ok) {
                     dispatch({ type: UPDATE_URL_SUCCESS });
-                    getUrls(0)(dispatch);
+                    getUrls()(dispatch);
 
                 } else {
                     alert('Ошибка добавления записи');

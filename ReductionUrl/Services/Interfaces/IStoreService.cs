@@ -1,11 +1,12 @@
 ﻿using DBModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ReductionUrl.Services.Interfaces
 {
     public interface IStoreService
     {
-        Task<Page<StoreUrl>> GetUrls(int index, int pageSize);
+        Task<IEnumerable<StoreUrl>> GetUrls();
         Task<StoreUrl> GetUrl(int id);
         Task AddUrl(string url);
         Task DeleteUrl(int id);

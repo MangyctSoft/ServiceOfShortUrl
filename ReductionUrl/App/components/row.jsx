@@ -21,7 +21,7 @@ export default class Row extends React.Component {
         return (
             <tbody key={this.props.data.id}>
                 <tr>
-                    <td className="">{this.props.data.longUrl}</td>
+                    <td style={{width: 50}}>{this.props.data.longUrl}</td>
                     <td className=""><a href={"/" + this.props.data.shortUrl}>{this.props.data.shortUrl}</a></td>
                     <td className="">{this.props.data.created}</td>
                     <td className="">{this.props.data.count}</td>

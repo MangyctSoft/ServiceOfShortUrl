@@ -747,7 +747,7 @@ function addNewUrl(texturl) {
             }).then(function (response) {
                 if (response.ok) {
                     dispatch({ type: _inputControllConstants.ADD_URL_SUCCESS });
-                    (0, _storeUrlActions.getUrls)(0)(dispatch);
+                    (0, _storeUrlActions.getUrls)()(dispatch);
                 } else {
                     alert('Ошибка добавления записи');
                     dispatch({ type: _inputControllConstants.ADD_URL_ERROR, payload: 'Ошибка добавления записи' });
@@ -773,7 +773,7 @@ function updateUrl(id, longUrl) {
             }).then(function (response) {
                 if (response.ok) {
                     dispatch({ type: _inputControllConstants.UPDATE_URL_SUCCESS });
-                    (0, _storeUrlActions.getUrls)(0)(dispatch);
+                    (0, _storeUrlActions.getUrls)()(dispatch);
                 } else {
                     alert('Ошибка добавления записи');
                     dispatch({ type: _inputControllConstants.UPDATE_URL_ERROR, payload: 'Ошибка добавления записи' });
@@ -1795,11 +1795,8 @@ var _inputControllActions = __webpack_require__(13);
 __webpack_require__(6);
 
 function getUrls() {
-    var pageIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-
     return function (dispatch) {
-        var queryTrailer = '?pageIndex=' + pageIndex;
-        fetch(constants.getStore + queryTrailer).then(function (response) {
+        fetch(constants.getStore).then(function (response) {
             return response.json();
         }).then(function (data) {
             dispatch({ type: _storeUrlConstants.GET_POSTS_SUCCESS, payload: data });
@@ -1816,11 +1813,12 @@ function deleteUrl(id) {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(id)
         }).then(function (response) {
             if (response.ok) {
                 dispatch({ type: _storeUrlConstants.DELETE_POST_SUCCESS });
-                getUrls(0)(dispatch);
+                getUrls()(dispatch);
             } else {
                 alert('Ошибка удаления записи');
                 dispatch({ type: _storeUrlConstants.DELETE_POST_ERROR, payload: 'Ошибка удаления записи' });
@@ -36143,20 +36141,20 @@ var StoreUrl = function (_React$Component) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.props.getUrls(0);
+            this.props.getUrls();
         }
     }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
 
-            var store = this.props.store.records.map(function (item) {
+            var store = this.props.store.data.map(function (item) {
                 return _react2.default.createElement(_row2.default, { key: item.id, data: item, deleteUrl: _this2.deleteUrl, updateUrl: _this2.updateUrl });
             });
 
             return _react2.default.createElement(
                 'div',
-                { id: 'storeTable' },
+                { className: 'block', id: 'storeTable' },
                 _react2.default.createElement(
                     'table',
                     { className: 'table' },
@@ -36168,26 +36166,26 @@ var StoreUrl = function (_React$Component) {
                             null,
                             _react2.default.createElement(
                                 'th',
-                                { width: '300' },
+                                { width: '400' },
                                 '\u0414\u043B\u0438\u043D\u043D\u044B\u0439 \u0443\u0440\u043B'
                             ),
                             _react2.default.createElement(
                                 'th',
-                                { width: '40' },
+                                { width: '100' },
                                 '\u041A\u043E\u0440\u043E\u0442\u043A\u0438\u0439'
                             ),
                             _react2.default.createElement(
                                 'th',
-                                { width: '250' },
+                                { width: '350' },
                                 '\u0414\u0430\u0442\u0430'
                             ),
                             _react2.default.createElement(
                                 'th',
-                                { width: '40' },
+                                { width: '100' },
                                 '\u0421\u0447\u0435\u0442\u0447\u0438\u043A'
                             ),
-                            _react2.default.createElement('th', { width: '70' }),
-                            _react2.default.createElement('th', { width: '70' })
+                            _react2.default.createElement('th', { width: '100' }),
+                            _react2.default.createElement('th', { width: '100' })
                         )
                     ),
                     store
@@ -36203,8 +36201,7 @@ var StoreUrl = function (_React$Component) {
 
 var mapProps = function mapProps(state) {
     return {
-        store: state.storeUrl.data,
-        error: state.storeUrl.error
+        store: state.storeUrl
     };
 };
 
@@ -36294,7 +36291,7 @@ var Row = function (_React$Component) {
                     null,
                     _react2.default.createElement(
                         'td',
-                        { className: '' },
+                        { style: { width: 50 } },
                         this.props.data.longUrl
                     ),
                     _react2.default.createElement(
@@ -36974,7 +36971,7 @@ var InputControll = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                { id: 'InputControll' },
+                { className: 'block', id: 'InputControll' },
                 inputAddUpdateUrl
             );
         }
@@ -37086,7 +37083,7 @@ exports.default = storeUrl;
 var _storeUrlConstants = __webpack_require__(30);
 
 var initialState = {
-    data: { records: [] },
+    data: [],
     error: ''
 };
 

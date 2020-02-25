@@ -1,11 +1,12 @@
 ﻿using DBModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DBStore.Interfaces
 {
     public interface IStoreRepository
     {
-        Task<Page<StoreUrl>> GetUrls(int index, int pageSize);
+        Task<IEnumerable<StoreUrl>> GetUrls();
         Task<StoreUrl> GetUrl(int urlId);       
         Task AddUrl(StoreUrl url);
         Task DeleteUrl(int urlId);

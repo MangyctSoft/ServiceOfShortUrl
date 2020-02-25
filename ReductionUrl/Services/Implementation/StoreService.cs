@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using ReductionUrl.Helpers;
 using ReductionUrl.Services.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -55,21 +56,18 @@ namespace ReductionUrl.Services.Implementation
             return await _repository.GetUrl(id);
         }
 
-        public async Task<Page<StoreUrl>> GetUrls(int index, int pageSize)
+        public async Task<IEnumerable<StoreUrl>> GetUrls()
         {
-            return await _repository.GetUrls(index, pageSize); ;
+            return await _repository.GetUrls();
         }
 
         public async Task UpdateUrl(int id, string longUrl)
         {
             if (id > 0)
             {
-                var result = new StoreUrl()
-                {
-                    ID = id,
-                    LongUrl = longUrl
-                };
-                await _repository.UpdateUrl(result);
+                var url = await _repository.GetUrl(id);
+                url.LongUrl = longUrl;
+                await _repository.UpdateUrl(url);
             }
         }
 
