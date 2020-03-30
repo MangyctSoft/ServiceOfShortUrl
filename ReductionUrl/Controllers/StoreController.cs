@@ -8,6 +8,9 @@ using ReductionUrl.Services.Interfaces;
 
 namespace ReductionUrl.Controllers
 {
+    /// <summary>
+    /// Контроллер для работы с url-адрессом.
+    /// </summary>
     [Route("api/[controller]")]
     public class StoreController : Controller
     {
@@ -50,7 +53,6 @@ namespace ReductionUrl.Controllers
         [HttpPut]
         public async Task UpdateUrl([FromBody] StoreUrl store)
         {
-
             await _storeService.UpdateUrl(store.ID, store.LongUrl);
         }
     }

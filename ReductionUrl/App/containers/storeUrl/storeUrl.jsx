@@ -11,7 +11,6 @@ import "isomorphic-fetch"
 class StoreUrl extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { query: location.search };
         this.deleteUrl = this.deleteUrl.bind(this);
         this.updateUrl = this.updateUrl.bind(this);
     }

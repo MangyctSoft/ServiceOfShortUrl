@@ -727,7 +727,6 @@ __webpack_require__(6);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function changeUrl(text) {
-    console.log(text);
     return {
         type: _inputControllConstants.CHANGE_URL,
         payload: text
@@ -787,7 +786,6 @@ function updateUrl(id, longUrl) {
 }
 
 function updateInputControll(data) {
-    console.log(data);
     return function (dispatch) {
         dispatch({ type: _inputControllConstants.CHANGE_UPDATE, payload: data });
     };
@@ -36122,7 +36120,6 @@ var StoreUrl = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (StoreUrl.__proto__ || Object.getPrototypeOf(StoreUrl)).call(this, props));
 
-        _this.state = { query: location.search };
         _this.deleteUrl = _this.deleteUrl.bind(_this);
         _this.updateUrl = _this.updateUrl.bind(_this);
         return _this;

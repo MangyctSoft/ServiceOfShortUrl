@@ -12,6 +12,11 @@ using System.Threading.Tasks;
 
 namespace ReductionUrl.Services.Implementation
 {
+    /// <summary>
+    /// Сервис по добавление, удалению, редактированию и изменению url-адресов в бд.
+    /// При добавлении добавляется сокращенная форма url.
+    /// При переходе подсчитывается количество переходов.
+    /// </summary>
     public class StoreService : IStoreService
     {
         IStoreRepository _repository;
@@ -20,19 +25,31 @@ namespace ReductionUrl.Services.Implementation
         {
             _repository = repository;
         }
-
+        /// <summary>
+        /// Увеличивать счетчик перехода.
+        /// </summary>
+        /// <param name="id">Идентификатор url в бд.</param>
+        /// <returns></returns>
         public async Task Counter(int id)
         {
             var url = await _repository.GetUrl(id);
             url.Count++;
             await _repository.UpdateUrl(url);
         }
-
+        /// <summary>
+        /// Поиск по короткому url.
+        /// </summary>
+        /// <param name="shortUrl">Короткий url/.</param>
+        /// <returns></returns>
         public async Task<StoreUrl> FindUrl(string shortUrl)
         {
             return await _repository.FindUrl(shortUrl);
         }
-
+        /// <summary>
+        /// Добавляем url и формируем его короткую версию.
+        /// </summary>
+        /// <param name="url">url-адресс.</param>
+        /// <returns></returns>
         public async Task AddUrl(string url)
         {
             var hashUrl = new HashUrl();
@@ -45,22 +62,38 @@ namespace ReductionUrl.Services.Implementation
             };
             await _repository.AddUrl(result);
         }
-
+        /// <summary>
+        /// Удаляем url-адресс из бд.
+        /// </summary>
+        /// <param name="id">Идентификатор url в бд.</param>
+        /// <returns></returns>
         public async Task DeleteUrl(int id)
         {
             await _repository.DeleteUrl(id);
         }
-
+        /// <summary>
+        /// Получаем url-адресс из бд.
+        /// </summary>
+        /// <param name="id">Идентификатор url в бд.</param>
+        /// <returns></returns>
         public async Task<StoreUrl> GetUrl(int id)
         {
             return await _repository.GetUrl(id);
         }
-
+        /// <summary>
+        /// Получаем все url-адресса из бд.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<StoreUrl>> GetUrls()
         {
             return await _repository.GetUrls();
         }
-
+        /// <summary>
+        /// Обновляем url-адресс в бд.
+        /// </summary>
+        /// <param name="id">Идентификатор url в бд.</param>
+        /// <param name="longUrl">url-адресс.</param>
+        /// <returns></returns>
         public async Task UpdateUrl(int id, string longUrl)
         {
             if (id > 0)

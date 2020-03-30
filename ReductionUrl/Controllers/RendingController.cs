@@ -4,6 +4,9 @@ using ReductionUrl.Services.Interfaces;
 
 namespace ReductionUrl.Controllers
 {
+    /// <summary>
+    /// Контроллер для перехода по короткой ссылке.
+    /// </summary>
     public class RendingController : Controller
     {
         IStoreService _urlService;

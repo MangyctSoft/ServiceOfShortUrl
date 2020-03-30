@@ -6,7 +6,6 @@ import "isomorphic-fetch"
 
 
 export function changeUrl(text) {
-    console.log(text);
     return {
         type: CHANGE_URL,
         payload: text
@@ -68,7 +67,6 @@ export function updateUrl(id, longUrl) {
 }
 
 export function updateInputControll(data) {
-    console.log(data);
     return (dispatch) => {
         dispatch({ type: CHANGE_UPDATE, payload: data });        
     }
